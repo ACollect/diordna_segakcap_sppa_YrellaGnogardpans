@@ -134,17 +134,18 @@ public class FilterWatermarkRepresentation extends FilterRepresentation {
     }
 
     public WaterMarkView getWaterMarkView(String textHint) {
-        if (currentMarkView == null) {
-            currentMarkView = new WaterMarkView(mContext,
-                    mContext.getResources().getDrawable(getWaterMarkId(), getCurrentTheme()), textHint);
-            if (positionInfo != null) {
-                currentMarkView.setTextPosition(positionInfo.marginLeft, positionInfo.marginTop,
-                        positionInfo.marginRight, positionInfo.marginBottom, positionInfo.gravity, positionInfo.isDip);
-            } else {
-                currentMarkView.setTextVisibility(false);
-            }
-            currentMarkView.setImageAlpha(markAlpha >= 0 ? markAlpha : 128);
+        if (currentMarkView != null) {
+            return currentMarkView;
         }
+        currentMarkView = new WaterMarkView(mContext,
+                mContext.getResources().getDrawable(getWaterMarkId(), getCurrentTheme()), textHint);
+        if (positionInfo != null) {
+            currentMarkView.setTextPosition(positionInfo.marginLeft, positionInfo.marginTop,
+                    positionInfo.marginRight, positionInfo.marginBottom, positionInfo.gravity, positionInfo.isDip);
+        } else {
+            currentMarkView.setTextVisibility(false);
+        }
+        currentMarkView.setImageAlpha(markAlpha >= 0 ? markAlpha : 128);
         return currentMarkView;
     }
 
